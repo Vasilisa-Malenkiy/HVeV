@@ -1,0 +1,24 @@
+/tracking/verbose 0
+
+#/process/inactivate phononScattering
+#/process/inactivate phononDownconversion
+/g4cmp/phononBounces 10000
+
+#/hvev/HitsFile phononTF.txt
+/hvev/HitsRootFile test_10meVphononL_uniform
+
+/run/initialize
+
+/gps/particle phononL
+/gps/energy 0.010 eV
+/gps/pos/type Volume
+/gps/pos/centre 0. 0. 0. mm
+/gps/pos/halfx 5.0 mm
+/gps/pos/halfy 5.0 mm
+/gps/pos/halfz 2.0 mm
+
+#/gps/pos/type Point
+#/gps/pos/centre 0. 0. 0. mm
+/gps/ang/type iso
+
+/run/beamOn 10000

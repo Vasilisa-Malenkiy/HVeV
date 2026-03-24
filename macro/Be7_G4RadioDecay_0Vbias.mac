@@ -1,0 +1,23 @@
+/tracking/verbose 0
+/random/setSeeds 474 0
+
+/g4cmp/phononBounces 10
+
+/g4cmp/produceCharges 1.0e+00
+/g4cmp/producePhonons 1.0e+00
+/g4cmp/sampleLuke 1.0
+/g4cmp/verbose 0
+
+/hvev/voltage 10 volt
+
+/hvev/PrimaryParticleName Be7_G4
+/hvev/HitsRootFile ./50nmALBFT.root
+/hvev/PrimariesFlag true
+/hvev/BottomSurfaceHitsFlag true
+
+/run/initialize
+/gps/number 1
+/gps/pos/type Point
+/gps/pos/centre 0. 0. -1.0 mm
+/gps/ene/mono 0.0 eV
+/run/beamOn 10

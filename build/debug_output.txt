@@ -1,0 +1,708 @@
+
+**************************************************************
+ Geant4 version Name: geant4-10-07    (4-December-2020)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+<<< Geant4 Physics List simulation engine: FTFP_BERT
+
+G4VModularPhysicsList::RegisterPhysics: a physics with given type already exists 
+ Type = 4 :   existing physics is Decay
+ New Decay can not be registered 
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : Run0202
+      issued by : G4VModularPhysicsList::RegisterPhysics
+Duplicate type for Decay
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+G4VModularPhysicsList::RegisterPhysics: a physics with given type already exists 
+ Type = 2 :   existing physics is G4EmStandard
+ New G4EmStandard can not be registered 
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : Run0202
+      issued by : G4VModularPhysicsList::RegisterPhysics
+Duplicate type for G4EmStandard
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Registered graphics systems are:
+  ASCIITree (ATree)
+  DAWNFILE (DAWNFILE)
+  G4HepRep (HepRepXML)
+  G4HepRepFile (HepRepFile)
+  RayTracer (RayTracer)
+  VRML1FILE (VRML1FILE)
+  VRML2FILE (VRML2FILE)
+  gMocrenFile (gMocrenFile)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByAttribute
+  drawByCharge
+  drawByOriginVolume
+  drawByParticleID
+  drawByEncounteredVolume
+
+Registered models:
+  None
+
+Registered filter factories:
+  attributeFilter
+  chargeFilter
+  originVolumeFilter
+  particleFilter
+  encounteredVolumeFilter
+
+Registered filters:
+  None
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+"/vis/list" to see available colours.
+WARNING: There is no world volume!
+WARNING: There is no world volume!
+WARNING: There is no world volume!
+WARNING: There is no world volume!
+WARNING: There is no world volume!
+Not output txt file for now.
+Applied bias voltage 0 volt across the silicon substrate
+
+ hInelastic FTFP_BERT : threshold between BERT and FTFP is over the interval 
+ for pions :   3 to 6 GeV
+ for kaons :   3 to 6 GeV
+ for proton :  3 to 6 GeV
+ for neutron : 3 to 6 GeV
+
+### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
+======================================================================
+======          Radioactive Decay Physics Parameters           =======
+======================================================================
+Max life time                                     1.4427e+06 ps
+Internal e- conversion flag                       1
+Stored internal conversion coefficients           1
+Enable correlated gamma emission                  0
+Max 2J for sampling of angular correlations       10
+Atomic de-excitation enabled                      1
+Auger electron emission enabled                   1
+Auger cascade enabled                             1
+Check EM cuts disabled for atomic de-excitation   1
+Use Bearden atomic level energies                 0
+======================================================================
+
+====================================================================
+                  HADRONIC PROCESSES SUMMARY (verbose level 1)
+
+---------------------------------------------------
+                           Hadronic Processes for neutron
+
+  Process: hadElastic
+        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
+     Cr_sctns:        G4NeutronElasticXS: 0 eV  ---> 100 TeV
+
+  Process: neutronInelastic
+        Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
+
+  Process: nCapture
+        Model:               nRadCapture: 0 eV  ---> 100 TeV
+     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
+
+  Process: nKiller
+
+---------------------------------------------------
+                           Hadronic Processes for B-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: B-Inelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for D-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: D-Inelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for GenericIon
+
+  Process: ionInelastic
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
+        Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
+  Process: RadioactiveDecayBase
+
+---------------------------------------------------
+                           Hadronic Processes for He3
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
+  Process: He3Inelastic
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
+        Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
+---------------------------------------------------
+                           Hadronic Processes for alpha
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
+  Process: alphaInelastic
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
+        Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
+---------------------------------------------------
+                           Hadronic Processes for anti_He3
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
+        Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: anti_He3Inelastic
+        Model:                      FTFP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_alpha
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
+        Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: anti_alphaInelastic
+        Model:                      FTFP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_deuteron
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
+        Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: anti_deuteronInelastic
+        Model:                      FTFP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_lambda
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: anti_lambdaInelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_neutron
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
+        Model:              AntiAElastic: 100 MeV ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: anti_neutronInelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_proton
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
+        Model:              AntiAElastic: 100 MeV ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: anti_protonInelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_triton
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
+        Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: anti_tritonInelastic
+        Model:                      FTFP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for deuteron
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
+  Process: dInelastic
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
+        Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
+---------------------------------------------------
+                           Hadronic Processes for e+
+
+  Process: electronNuclear
+        Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
+     Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for e-
+
+  Process: electronNuclear
+        Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
+     Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for gamma
+
+  Process: photonNuclear
+        Model:               GammaNPreco: 0 eV  ---> 200 MeV
+        Model:            BertiniCascade: 199 MeV ---> 6 GeV
+        Model:           TheoFSGenerator: 3 GeV ---> 100 TeV
+     Cr_sctns:            PhotoNuclearXS: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for kaon+
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: kaon+Inelastic
+        Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for kaon-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: kaon-Inelastic
+        Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: hBertiniCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for lambda
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: lambdaInelastic
+        Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for mu+
+
+  Process: muonNuclear
+        Model:      G4MuonVDNuclearModel: 0 eV  ---> 1 PeV
+     Cr_sctns:     KokoulinMuonNuclearXS: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for mu-
+
+  Process: muonNuclear
+        Model:      G4MuonVDNuclearModel: 0 eV  ---> 1 PeV
+     Cr_sctns:     KokoulinMuonNuclearXS: 0 eV  ---> 100 TeV
+
+  Process: muMinusCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for pi+
+
+  Process: hadElastic
+        Model:           hElasticGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
+
+  Process: pi+Inelastic
+        Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for pi-
+
+  Process: hadElastic
+        Model:           hElasticGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
+
+  Process: pi-Inelastic
+        Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
+
+  Process: hBertiniCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for proton
+
+  Process: hadElastic
+        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
+     Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
+
+  Process: protonInelastic
+        Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for sigma-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: sigma-Inelastic
+        Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: hBertiniCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for triton
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
+  Process: tInelastic
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
+        Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
+================================================================
+=======================================================================
+======       Pre-compound/De-excitation Physics Parameters     ========
+=======================================================================
+Type of pre-compound inverse x-section              3
+Pre-compound model active                           1
+Pre-compound excitation low energy (MeV)            0.1
+Pre-compound excitation high energy (MeV)           30
+Type of de-excitation inverse x-section             3
+Type of de-excitation factory                       Evaporation+GEM
+Number of de-excitation channels                    68
+Min excitation energy (keV)                         0.01
+Min energy per nucleon for multifragmentation (MeV) 2e+05
+Limit excitation energy for Fermi BreakUp (MeV)     20
+Level density (1/MeV)                               0.075
+Use simple level density model                      1
+Use discrete excitation energy of the residual      0
+Time limit for long lived isomeres (ns)             1442.7
+Isomer production flag                              1
+Internal e- conversion flag                         1
+Store e- internal conversion data                   1
+Electron internal conversion ID                     1
+Correlated gamma emission flag                      0
+Max 2J for sampling of angular correlations         10
+=======================================================================
+G4VisManager: Using G4TrajectoryDrawByCharge as fallback trajectory model.
+See commands in /vis/modeling/trajectories/ for other options.
+... create file : ./debug.root - done
+... open analysis file : ./debug.root - done
+================= Run is = 0 =================
+================= Run type is = 0 =================
+================= Event to be processed = 5 =================
+================= NEvent = 0 =================
+G4CMPConfigManager for G4CMP Version 
+fPhysicsModelID 0
+/g4cmp/LatticeData ./CrystalMaps	# G4LATTICEDATA
+/g4cmp/verbose 0				# G4CMP_DEBUG
+/g4cmp/chargeBounces 1				# G4CMP_EH_BOUNCES
+/g4cmp/phononBounces 10			# G4CMP_PHON_BOUNCES
+/g4cmp/phononSurfStepSize 0 um		# G4CMP_PHON_SURFSTEP
+/g4cmp/phononSurfStepLimit -1		# G4CMP_PHON_SURFLIMIT
+/g4cmp/IVRateModel 			# G4CMP_IV_RATE_MODEL
+/g4cmp/LukeDebugFile LukePhononEnergies			# G4CMP_LUKE_FILE
+/g4cmp/eTrappingMFP 1.79769e+308 mm		# G4CMP_ETRAPPING_MFP
+/g4cmp/hTrappingMFP 1.79769e+308 mm		# G4CMP_HTRAPPING_MFP
+/g4cmp/eDTrapIonizationMFP 1.79769e+308 mm	# G4CMP_EDTRAPION_MFP
+/g4cmp/eATrapIonizationMFP 1.79769e+308 mm	# G4CMP_EATRAPION_MFP
+/g4cmp/hDTrapIonizationMFP 1.79769e+308 mm	# G4CMP_HDTRAPION_MFP
+/g4cmp/hATrapIonizationMFP 1.79769e+308 mm	# G4CMP_HATRAPION_MFP
+/g4cmp/temperature 0 K				# G4CMP_TEMPERATURE
+/g4cmp/clearance 1e-06 mm			# G4CMP_CLEARANCE
+/g4cmp/minimumStep -1				# G4CMP_MIN_STEP
+/g4cmp/samplingEnergy -1			# G4CMP_SAMPLE_ENERGY
+/g4cmp/producePhonons 1				# G4CMP_MAKE_PHONONS
+/g4cmp/produceCharges 1				# G4CMP_MAKE_CHARGES
+/g4cmp/sampleLuke 1				# G4CMP_LUKE_SAMPLE
+/g4cmp/maxLukePhonons -1			# G4CMP_MAX_LUKE
+/g4cmp/combiningStepLength 0 mm			# G4CMP_COMBINE_STEPLEN
+/g4cmp/minEPhonons 0 eV				# G4CMP_EMIN_PHONONS
+/g4cmp/minECharges 0 eV				# G4CMP_EMIN_CHARGES
+/g4cmp/useKVsolver 0				# G4CMP_USE_KVSOLVER
+/g4cmp/enableFanoStatistics 1			# G4CMP_FANO_ENABLED
+/g4cmp/kaplanKeepPhonons 1			# G4CMP_KAPLAN_KEEP 
+/g4cmp/createChargeCloud 0			# G4CMP_CHARGE_CLOUD
+/g4cmp/recordMinETracks 1			# G4CMP_RECORD_EMIN
+/g4cmp/NIELPartition 19G4CMPLewinSmithNIEL	# G4CMP_NIEL_FUNCTION 
+/g4cmp/NIELPartition/Empirical/klow 0.04 			# G4CMP_EMPIRICAL_KLOW
+/g4cmp/NIELPartition/Empirical/khigh 0.142 				# G4CMP_EMPIRICAL_KHIGH
+/g4cmp/NIELPartition/Empirical/Elow 0.39 keV				# G4CMP_EMPIRICAL_ELOW
+/g4cmp/NIELPartition/Empirical/Ehigh 7 keV				# G4CMP_EMPIRICAL_EHIGH
+/g4cmp/NIELPartition/Empirical/kFixed 0.142 				# G4CMP_EMPIRICAL_KFIXED
+/g4cmp/NIELPartition/Empirical/EDepK 1			# G4CMP_EMPIRICAL_EDEPK 
+Primary particle pos-type is Point center at ( 0, 0, 0 ) and the volume half lengths are ( 5, 5, 1e-05) 
+***** Event ID 0
++++++ Primaries pre track ID 1 Be7 0 eV 0 0 -1.9999 mm -0 0 0 
+Primary Track ID: 1 Be7 with Kinetic Energy: 0 eV  produced 3 secondaries
+Secondary Track ID: 0 e- Ekin: 58.8676
+Secondary Track ID: 0 Li7 Ekin: 56.8318
+Secondary Track ID: 0 nu_e Ekin: 861776
+
+Total energy partition of Be7: 0 eV
+Charge-pair: 0 eV
+Phonon: 0 eV
+Others: 861892 eV
+
++++++ Primaries post track ID 1 Be7 0 eV 0 0 -1.9999 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 4 nu_e 861776 eV 0 0 -1.9999 mm 843982 122213 124162 
++++++ Primaries post track ID 4 nu_e 861776 eV 160 23.1687 21.5384 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 3 Li7 56.8318 eV 0 0 -1.9999 mm -843982 -122213 -124162 
+Primary Track ID: 3 Li7 with Kinetic Energy: 0 eV  produced 795 secondaries
+Total energy deposit in this step is : 56.8318 eV, (non-ionizing part: 0 eV) in the physical volume: fSiliconPhysical
+
+Total energy partition of Li7: 56.8318 eV
+Charge-pair: 5.48093 eV
+Phonon: 49.0108 eV
+Others: 0 eV
+
++++++ Primaries post track ID 3 Li7 0 eV -2.36942e-05 -3.43103e-06 -1.9999 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 2 e- 58.867573220378 eV 0 0 -1.9999 mm 7643.0831267738 -1153.5898147931 646.92174760495 
+Primary Track ID: 2 e- with Kinetic Energy: 0 eV  produced 30 secondaries
+Total energy deposit in this step is : 58.867573220378 eV, (non-ionizing part: 0 eV) in the physical volume: fSiliconPhysical
+
+Total energy partition of e-: 58.867573220378 eV
+Charge-pair: 41.317573220378 eV
+Phonon: 0 eV
+Others: 0 eV
+
++++++ Primaries post track ID 2 e- 0 eV 2.48979506632e-07 -3.7579104947419e-08 -1.999899978926 mm
+Total energy deposited in this event is: 115.6993341781 eV
+Primary particle pos-type is Point center at ( 0, 0, 0 ) and the volume half lengths are ( 5, 5, 1e-05) 
+***** Event ID 1
++++++ Primaries pre track ID 1 Be7 0 eV 0 0 -1.9999 mm 0 0 0 
+Primary Track ID: 1 Be7 with Kinetic Energy: 0 eV  produced 3 secondaries
+Secondary Track ID: 0 e- Ekin: 59.95542106374
+Secondary Track ID: 0 Li7 Ekin: 56.831760957721
+Secondary Track ID: 0 nu_e Ekin: 861776.31823863
+
+Total energy partition of Be7: 0 eV
+Charge-pair: 0 eV
+Phonon: 0 eV
+Others: 861893.10542065 eV
+
++++++ Primaries post track ID 1 Be7 0 eV 0 0 -1.9999 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 4 nu_e 861776.31823863 eV 0 0 -1.9999 mm 845686.40043241 54161.940726153 -156650.6271209 
++++++ Primaries post track ID 4 nu_e 861776.31823863 eV 160 10.247191526024 -31.637482355029 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 3 Li7 56.831760957721 eV 0 0 -1.9999 mm -845686.3973316 -54161.940527562 156650.62654652 
+Primary Track ID: 3 Li7 with Kinetic Energy: 0 eV  produced 795 secondaries
+Total energy deposit in this step is : 56.831760957721 eV, (non-ionizing part: 0 eV) in the physical volume: fSiliconPhysical
+
+Total energy partition of Li7: 56.831760957721 eV
+Charge-pair: 5.48093300929 eV
+Phonon: 49.010827948431 eV
+Others: 0 eV
+
++++++ Primaries post track ID 3 Li7 0 eV -2.3742082735861e-05 -1.5205604313817e-06 -1.9998956021379 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 2 e- 59.95542106374 eV 0 0 -1.9999 mm 6.6993152964858 -7567.6507179745 2002.1293681363 
+Primary Track ID: 2 e- with Kinetic Energy: 0 eV  produced 38 secondaries
+Total energy deposit in this step is : 59.95542106374 eV, (non-ionizing part: 0 eV) in the physical volume: fSiliconPhysical
+
+Total energy partition of e-: 59.95542106374 eV
+Charge-pair: 37.72542106374 eV
+Phonon: 0 eV
+Others: 0 eV
+
++++++ Primaries post track ID 2 e- 0 eV 2.2390441602428e-10 -2.5292590954372e-07 -1.9998999330849 mm
+Total energy deposited in this event is: 116.78718202146 eV
+Primary particle pos-type is Point center at ( 0, 0, 0 ) and the volume half lengths are ( 5, 5, 1e-05) 
+***** Event ID 2
++++++ Primaries pre track ID 1 Be7 0 eV 0 0 -1.9999 mm 0 0 0 
+Primary Track ID: 1 Be7 with Kinetic Energy: 0 eV  produced 3 secondaries
+Secondary Track ID: 0 e- Ekin: 5.6477450743886
+Secondary Track ID: 0 Li7 Ekin: 56.83892959496
+Secondary Track ID: 0 nu_e Ekin: 861830.66107088
+
+Total energy partition of Be7: 0 eV
+Charge-pair: 0 eV
+Phonon: 0 eV
+Others: 861893.14774555 eV
+
++++++ Primaries post track ID 1 Be7 0 eV 0 0 -1.9999 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 4 nu_e 861830.66107088 eV 0 0 -1.9999 mm 253091.91563691 -331184.32208809 -754329.84522963 
++++++ Primaries post track ID 4 nu_e 861830.66107088 eV 53.012018857149 -69.36906492467 -160 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 3 Li7 56.83892959496 eV 0 0 -1.9999 mm -253091.9166966 331184.32347475 754329.848388 
+Primary Track ID: 3 Li7 with Kinetic Energy: 0 eV  produced 795 secondaries
+Total energy deposit in this step is : 56.83892959496 eV, (non-ionizing part: 0 eV) in the physical volume: fSiliconPhysical
+
+Total energy partition of Li7: 56.83892959496 eV
+Charge-pair: 5.482052835976 eV
+Phonon: 49.016876758984 eV
+Others: 0 eV
+
++++++ Primaries post track ID 3 Li7 0 eV -7.1053871091539e-06 9.2977794529579e-06 -1.9998788226916 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 2 e- 5.6477450743886 eV 0 0 -1.9999 mm 56.592209663467 -1399.7661403125 1951.7856248075 
+Primary Track ID: 2 e- with Kinetic Energy: 0 eV  produced 4 secondaries
+Total energy deposit in this step is : 5.6477450743886 eV, (non-ionizing part: 0 eV) in the physical volume: fSiliconPhysical
+
+Total energy partition of e-: 5.6477450743886 eV
+Charge-pair: 3.3077450743886 eV
+Phonon: 0 eV
+Others: 0 eV
+
++++++ Primaries post track ID 2 e- 0 eV 2.8160198053902e-08 -6.9652151726801e-07 -1.9998990287944 mm
+Total energy deposited in this event is: 62.486674669349 eV
+Primary particle pos-type is Point center at ( 0, 0, 0 ) and the volume half lengths are ( 5, 5, 1e-05) 
+***** Event ID 3
++++++ Primaries pre track ID 1 Be7 0 eV 0 0 -1.9999 mm 0 0 0 
+Primary Track ID: 1 Be7 with Kinetic Energy: 0 eV  produced 3 secondaries
+Secondary Track ID: 0 e- Ekin: 60.133965376408
+Secondary Track ID: 0 Li7 Ekin: 56.831760957721
+Secondary Track ID: 0 nu_e Ekin: 861776.31823863
+
+Total energy partition of Be7: 0 eV
+Charge-pair: 0 eV
+Phonon: 0 eV
+Others: 861893.28396496 eV
+
++++++ Primaries post track ID 1 Be7 0 eV 0 0 -1.9999 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 4 nu_e 861776.31823863 eV 0 0 -1.9999 mm 265106.80002483 -503251.0835536 647391.03651475 
++++++ Primaries post track ID 4 nu_e 861776.31823863 eV 66.339001733095 -125.93103798514 160 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 3 Li7 56.831760957721 eV 0 0 -1.9999 mm -265106.79905278 503251.08170837 -647391.03414101 
+Primary Track ID: 3 Li7 with Kinetic Energy: 0 eV  produced 797 secondaries
+Total energy deposit in this step is : 56.831760957721 eV, (non-ionizing part: 0 eV) in the physical volume: fSiliconPhysical
+
+Total energy partition of Li7: 56.831760957721 eV
+Charge-pair: 4.31093300929 eV
+Phonon: 49.010827948431 eV
+Others: 0 eV
+
++++++ Primaries post track ID 3 Li7 0 eV -7.442696934479e-06 1.4128439166731e-05 -1.9999181750724 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 2 e- 60.133965376408 eV 0 0 -1.9999 mm -5244.4666675359 -4206.1753555402 -4032.871913164 
+Primary Track ID: 2 e- with Kinetic Energy: 0 eV  produced 34 secondaries
+Total energy deposit in this step is : 60.133965376408 eV, (non-ionizing part: 0 eV) in the physical volume: fSiliconPhysical
+
+Total energy partition of e-: 60.133965376408 eV
+Charge-pair: 40.243965376408 eV
+Phonon: 0 eV
+Others: 0 eV
+
++++++ Primaries post track ID 2 e- 0 eV -1.7601117013825e-07 -1.411647538382e-07 -1.9999001353485 mm
+Total energy deposited in this event is: 116.96572633413 eV
+Primary particle pos-type is Point center at ( 0, 0, 0 ) and the volume half lengths are ( 5, 5, 1e-05) 
+***** Event ID 4
++++++ Primaries pre track ID 1 Be7 0 eV 0 0 -1.9999 mm -0 -0 0 
+Primary Track ID: 1 Be7 with Kinetic Energy: 0 eV  produced 3 secondaries
+Secondary Track ID: 0 e- Ekin: 60.31297727449
+Secondary Track ID: 0 Li7 Ekin: 56.831760957721
+Secondary Track ID: 0 nu_e Ekin: 861776.31823863
+
+Total energy partition of Be7: 0 eV
+Charge-pair: 0 eV
+Phonon: 0 eV
+Others: 861893.46297686 eV
+
++++++ Primaries post track ID 1 Be7 0 eV 0 0 -1.9999 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 4 nu_e 861776.31823863 eV 0 0 -1.9999 mm -774127.2817316 -12427.556175956 378458.62416288 
++++++ Primaries post track ID 4 nu_e 861776.31823863 eV -160 -2.568581465964 76.221577649789 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 3 Li7 56.831760957721 eV 0 0 -1.9999 mm 774127.27889317 12427.556130389 -378458.62277521 
+Primary Track ID: 3 Li7 with Kinetic Energy: 0 eV  produced 795 secondaries
+Total energy deposit in this step is : 56.831760957721 eV, (non-ionizing part: 0 eV) in the physical volume: fSiliconPhysical
+
+Total energy partition of Li7: 56.831760957721 eV
+Charge-pair: 5.48093300929 eV
+Phonon: 49.010827948431 eV
+Others: 0 eV
+
++++++ Primaries post track ID 3 Li7 0 eV 2.1733108113789e-05 3.4889536686795e-07 -1.9999106249739 mm
+***** Creator process: RadioactiveDecayBase
++++++ Primaries pre track ID 2 e- 60.31297727449 eV 0 0 -1.9999 mm 393.64115626563 -2721.7947101218 -7353.9274638463 
+Primary Track ID: 2 e- with Kinetic Energy: 0 eV  produced 35 secondaries
+Total energy deposit in this step is : 60.31297727449 eV, (non-ionizing part: 0 eV) in the physical volume: fSiliconPhysical
+
+Total energy partition of e-: 60.31297727449 eV
+Charge-pair: 40.42297727449 eV
+Phonon: 1.2705494208815e-15 eV
+Others: 0 eV
+
++++++ Primaries post track ID 2 e- 0 eV 1.3266148969274e-08 -9.1727537920073e-08 -1.9999002478356 mm

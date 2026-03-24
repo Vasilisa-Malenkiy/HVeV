@@ -1,0 +1,24 @@
+/tracking/verbose 0
+
+/random/setSeeds 111 9000
+
+/hvev/voltage 100 volt
+
+/g4cmp/produceCharges 1.0
+/g4cmp/producePhonons 1.0
+/g4cmp/sampleLuke 1.0
+
+/hvev/PrimaryParticleName Be7
+/hvev/HitsRootFile test_Be7EC
+/hvev/PrimariesFlag true
+/hvev/BottomSurfaceHitsFlag true
+
+
+/run/initialize
+
+/gps/number 1
+/gps/pos/centre 0. 0. 0.0 mm
+#/gps/pos/centre 0. 0. 1.990 mm
+/gps/ene/mono 0.0 eV
+
+/run/beamOn 10

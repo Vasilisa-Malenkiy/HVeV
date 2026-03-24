@@ -1,0 +1,19 @@
+/tracking/verbose 1
+
+/g4cmp/NIELPartition impact
+/run/initialize
+/g4cmp/phononBounces 1000
+/g4cmp/produceCharges 1.0 
+/g4cmp/producePhonons 1.0 
+/g4cmp/sampleLuke 1.0 
+
+/hvev/HitsRootFile test_phononL_2.7meV_center_noVbias.root
+/hvev/PrimariesFlag false
+
+/gps/particle phononL
+/gps/energy 2.7e-3 eV
+/gps/pos/type Point
+/gps/pos/centre 0. 0. 0.0 mm
+/gps/ang/type iso
+
+/run/beamOn 100

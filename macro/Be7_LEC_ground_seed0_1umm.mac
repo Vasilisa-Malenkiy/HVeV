@@ -1,0 +1,12 @@
+/tracking/verbose 0 
+/random/setSeeds 377 0 
+/hvev/voltage 10 volt 
+/g4cmp/produceCharges 1.0 
+/g4cmp/producePhonons 1.0 
+/g4cmp/sampleLuke 1.0 
+/hvev/PrimaryParticleName Be7_LEC_ground 
+/hvev/HitsRootFile /Users/yumiao/Documents/Works/SterileNeutrino/BeEST/Simulation/HVeV/build/test_Be7_LEC_ground_10Vbias_seed0_1um
+/run/initialize 
+/gps/number 1
+/gps/pos/centre 0. 0. -1.999 mm
+/run/beamOn 1

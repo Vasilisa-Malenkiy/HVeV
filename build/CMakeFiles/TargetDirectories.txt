@@ -1,0 +1,8 @@
+/Users/vasilisamalenkiy/Desktop/HVeV/build/CMakeFiles/hvevLib.dir
+/Users/vasilisamalenkiy/Desktop/HVeV/build/CMakeFiles/g4cmpHVeV.dir
+/Users/vasilisamalenkiy/Desktop/HVeV/build/CMakeFiles/edit_cache.dir
+/Users/vasilisamalenkiy/Desktop/HVeV/build/CMakeFiles/rebuild_cache.dir
+/Users/vasilisamalenkiy/Desktop/HVeV/build/CMakeFiles/list_install_components.dir
+/Users/vasilisamalenkiy/Desktop/HVeV/build/CMakeFiles/install.dir
+/Users/vasilisamalenkiy/Desktop/HVeV/build/CMakeFiles/install/local.dir
+/Users/vasilisamalenkiy/Desktop/HVeV/build/CMakeFiles/install/strip.dir

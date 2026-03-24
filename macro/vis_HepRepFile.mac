@@ -1,0 +1,81 @@
+/vis/open HepRepFile
+
+# now ensure that the geometry is displayed
+/vis/drawVolume
+
+# add the trajectories
+/tracking/storeTrajectory 1
+/vis/scene/add/hits
+
+#/vis/filtering/trajectories/create/particleFilter
+#/vis/filtering/trajectories/particleFilter-0/add G4CMPDriftElectron
+#/vis/filtering/trajectories/particleFilter-0/add G4CMPDriftHole
+/vis/scene/add/trajectories
+
+# add the step markers
+/vis/modeling/trajectories/create/drawByParticleID
+#/vis/modeling/trajectories/drawByParticleID-0/default/setDrawStepPts true
+/vis/modeling/trajectories/drawByParticleID-0/set phononTS Red 
+/vis/modeling/trajectories/drawByParticleID-0/set phononTF Green
+/vis/modeling/trajectories/drawByParticleID-0/set phononL Blue
+
+/vis/modeling/trajectories/drawByParticleID-0/set G4CMPDriftElectron Blue
+/vis/modeling/trajectories/drawByParticleID-0/set e- Blue
+/vis/modeling/trajectories/drawByParticleID-0/set G4CMPDriftHole Orange
+/vis/modeling/trajectories/drawByParticleID-0/set gamma Black
+/vis/modeling/trajectories/drawByParticleID-0/set nu_e Green
+/vis/modeling/trajectories/drawByParticleID-0/set Li7 Gray
+
+# ensure that they are not cleared at the end of the event
+/vis/scene/endOfEventAction accumulate
+
+#/hvev/PrimaryParticleName chargepair
+#/hvev/PrimaryParticleEnergy 0.001 eV
+/hvev/voltage 0 volt
+
+#/g4cmp/sampleLuke 0.001
+
+
+#G4CMP Settings
+/g4cmp/producePhonons 1.0
+/g4cmp/produceCharges 1.0
+/g4cmp/sampleLuke 1.0
+
+# Particle generation
+#### Gamma interaction
+#/gps/number 1
+##/gps/particle gamma
+##/gps/pos/type Point
+##/gps/direction 0 -4 -1
+#/gps/pos/centre 0.0 0.0 1.999 mm # A bit above the chip top
+##/gps/pos/centre 0.0 0.1 0.481 cm # halfway between bottom and top of chip (Top of chip is 0.5cm)
+#/gps/ene/type Mono
+#/gps/energy 0. eV
+#/run/beamOn 1
+
+### Phonon interaction
+#/gps/number 1
+#/gps/particle G4CMPDriftElectron
+#/gps/particle phononL
+#/gps/pos/type Point
+#/gps/pos/centre 0. 0. 0. mm
+#/gps/ene/type Mono
+#/gps/ene/mono 0.01 eV
+
+
+### Be7 interaction
+#/hvev/PrimaryParticleName Be7_KEC_ground
+#/gps/number 1
+#/gps/pos/centre 0. 0. 0. mm
+#/run/beamOn 1
+/hvev/PrimaryParticleName Be7_KEC_ground 
+/hvev/PrimariesFlag true
+
+/run/initialize 
+/gps/number 1
+/gps/pos/centre 0. 0. -1.9999 mm
+/run/beamOn 1
+
+#/run/beamOn 100
+/vis/viewer/flush
+

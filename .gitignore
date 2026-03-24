@@ -1,0 +1,9 @@
+./build/*
+./study/*
+data/
+*.root
+*.csv
+*.parquet
+*.hdf5
+__pycache__/
+*.pyc

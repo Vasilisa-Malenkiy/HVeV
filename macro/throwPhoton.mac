@@ -1,0 +1,24 @@
+/tracking/verbose 0
+
+/random/setSeeds 111 9000
+#/hvev/HitsFile /Users/yumiao/Documents/Works/SterileNeutrino/BeEST/Simulation/HVeV/study/photons/Be7_112gamma_test_voltage100_seed0.txt
+
+/hvev/voltage 100 volt
+
+/run/initialize
+
+/g4cmp/producePhonons 1.0
+/g4cmp/sampleLuke 1.0
+/g4cmp/produceCharges 1.0
+
+# Particle generation
+/gps/number 1
+/gps/particle gamma
+/gps/pos/type Point
+/gps/ang/type iso
+/gps/pos/centre 0.0 0.0 0.0 mm # A bit below the chip top surface
+#/gps/pos/centre 0.0 0.1 0.481 cm # halfway between bottom and top of chip (Top of chip is 0.5cm)
+/gps/ene/type Mono
+/gps/energy 100 eV
+/run/beamOn 1
+
