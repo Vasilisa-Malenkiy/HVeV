@@ -1,6 +1,6 @@
 # HVeV simulation
 
-This is a HVeV-like detector simulation package developed for characterization of High Voltage electronVolt BeEST detectors. 
+This is a HVeV-like detector simulation package developed for characterization of High Voltage electron Volt detectors in BeEST. 
 
 ## Detector configuration
 
