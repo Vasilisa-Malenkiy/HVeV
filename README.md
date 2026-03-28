@@ -1,6 +1,6 @@
 # HVeV simulation
 
-This is a HVeV-like detector simulation package.
+This is a HVeV-like detector simulation package developed for characterization of HVeV BeEST detectors. 
 
 ## Detector configuration
 
