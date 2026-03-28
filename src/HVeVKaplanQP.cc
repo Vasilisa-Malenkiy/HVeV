@@ -19,18 +19,18 @@
 G4double G4CMP::KaplanPhononQP(G4double energy,
                                G4MaterialPropertiesTable* prop,
                                std::vector<G4double>& reflectedEnergies) {
-  G4cout << "!!! EXECUTING KAPLAN PHYSICS !!!" << G4endl;
+  //G4cout << "!!! EXECUTING KAPLAN PHYSICS !!!" << G4endl;
   static G4ThreadLocal HVeVKaplanQP* theKaplanQP = new HVeVKaplanQP(prop);
   theKaplanQP->SetFilmProperties(prop);
   theKaplanQP->SetVerboseLevel(G4CMPConfigManager::GetVerboseLevel());
 
   // Removed unit division to bypass compiler errors
-  G4cout << "\n[TOP-LEVEL] KaplanPhononQP Entry: E=" << energy << G4endl;
+  //G4cout << "\n[TOP-LEVEL] KaplanPhononQP Entry: E=" << energy << G4endl;
 
   G4double Edep = theKaplanQP->AbsorbPhonon(energy, reflectedEnergies);
 
-  G4cout << "[TOP-LEVEL] Result: Total E_dep=" << Edep << " | "
-         << "Reflected Count=" << reflectedEnergies.size() << G4endl;
+  //G4cout << "[TOP-LEVEL] Result: Total E_dep=" << Edep << " | "
+         //<< "Reflected Count=" << reflectedEnergies.size() << G4endl;
   return Edep;
 }
 
@@ -99,10 +99,10 @@ G4double HVeVKaplanQP::CalcEscapeProbability(G4double energy, G4double frac) con
   G4double mfp = vSound * phononLifetime / (1. + phononLifetimeSlope * (energy/gapEnergy - 2.));
   G4double prob = std::exp(-path/mfp);
 
-  G4cout << "  [CALC] E=" << std::setw(6) << energy << " | "
-         << "Path=" << std::setw(6) << path << " | "
-         << "MFP=" << std::setw(6) << mfp << " | "
-         << "EscapeProb=" << prob << G4endl;
+//  G4cout << "  [CALC] E=" << std::setw(6) << energy << " | "
+//         << "Path=" << std::setw(6) << path << " | "
+//         << "MFP=" << std::setw(6) << mfp << " | "
+//         << "EscapeProb=" << prob << G4endl;
 
   return prob;
 }
@@ -114,7 +114,7 @@ G4double HVeVKaplanQP::AbsorbPhonon(G4double energy, std::vector<G4double>& refl
   keepAllPhonons = G4CMPConfigManager::KeepKaplanPhonons();
 
   if (DoDirectAbsorption(energy)) {
-    G4cout << "  [EVENT] Direct Absorption triggered for E=" << energy << G4endl;
+    //G4cout << "  [EVENT] Direct Absorption triggered for E=" << energy << G4endl;
     return energy;
   }
 
@@ -123,12 +123,12 @@ G4double HVeVKaplanQP::AbsorbPhonon(G4double energy, std::vector<G4double>& refl
   G4double roll = G4UniformRand();
 
   if (IsSubgap(energy) || roll <= pEscape) {
-    G4cout << "  [EVENT] Phonon REFLECTED (Roll " << roll << " <= Prob " << pEscape << ")" << G4endl;
+    //G4cout << "  [EVENT] Phonon REFLECTED (Roll " << roll << " <= Prob " << pEscape << ")" << G4endl;
     reflectedEnergies.push_back(energy);
     return 0.;
   }
 
-  G4cout << "  [EVENT] Phonon ABSORBED into film. Starting cascade..." << G4endl;
+  //G4cout << "  [EVENT] Phonon ABSORBED into film. Starting cascade..." << G4endl;
 
   G4double EDep = 0.;
   G4int nQPpairs = (highQPLimit > 0. ? std::ceil(energy/(2.*highQPLimit*gapEnergy)) : 1);
@@ -156,7 +156,7 @@ void HVeVKaplanQP::CalcReflectedPhononEnergies(std::vector<G4double>& phonEnergi
     G4double pEscape = CalcEscapeProbability(E, frac);
 
     if (G4UniformRand() < pEscape) {
-      G4cout << "  [CASCADE] Secondary Phonon Escaped: " << E << G4endl;
+      //G4cout << "  [CASCADE] Secondary Phonon Escaped: " << E << G4endl;
       reflectedEnergies.push_back(E);
     } else if (keepAllPhonons || !IsSubgap(E)) {
       newPhonEnergies.push_back(E);

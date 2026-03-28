@@ -11,13 +11,13 @@
 /hvev/voltage 10 volt
 
 /hvev/PrimaryParticleName Be7_G4
-/hvev/HitsRootFile ./50nmALBFT.root
+/hvev/HitsRootFile ./1nm2ev.root
 /hvev/PrimariesFlag true
 /hvev/BottomSurfaceHitsFlag true
 
 /run/initialize
 /gps/number 1
 /gps/pos/type Point
-/gps/pos/centre 0. 0. -1.0 mm
+/gps/pos/centre 0. 0. 0. mm
 /gps/ene/mono 0.0 eV
-/run/beamOn 10
+/run/beamOn 2

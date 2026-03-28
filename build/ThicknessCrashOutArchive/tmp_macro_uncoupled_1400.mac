@@ -1,5 +1,5 @@
 /tracking/verbose 0
-/random/setSeeds 5500 0
+/random/setSeeds 1400 0
 
 /g4cmp/phononBounces 10
 
@@ -11,13 +11,13 @@
 /hvev/voltage 10 volt
 
 /hvev/PrimaryParticleName Be7_G4
-/hvev/HitsRootFile ./50nm_z-1.0_uncoupled_batch4.root
+/hvev/HitsRootFile ./10nhelp_uncoupled_batch0.root
 /hvev/PrimariesFlag true
 /hvev/BottomSurfaceHitsFlag true
 
 /run/initialize
 /gps/number 1
 /gps/pos/type Point
-/gps/pos/centre 0. 0. -1.0 mm
+/gps/pos/centre 0. 0. -1.9999 mm
 /gps/ene/mono 0.0 eV
-/run/beamOn 10
+/run/beamOn 50

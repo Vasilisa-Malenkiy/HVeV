@@ -51,13 +51,13 @@ G4bool HVeVPhononElectrode::IsNearElectrode(const G4Step& /*step*/) const {
 void HVeVPhononElectrode::
 AbsorbAtElectrode(const G4Track& track, const G4Step& step,
 		  G4ParticleChange& particleChange) const {
-  //if (verboseLevel>1) {
-  if (1) {
-    G4cout << "HVeVPhononElectrode::AbsorbAtElectrode: Track "
-	   << track.GetTrackID() << " absorbed at step "
-	   << step.GetTrack()->GetCurrentStepNumber()
-           << G4endl;
-  }
+    if (verboseLevel>1) {
+        if (1) {
+            G4cout << "HVeVPhononElectrode::AbsorbAtElectrode: Track "
+            << track.GetTrackID() << " absorbed at step "
+            << step.GetTrack()->GetCurrentStepNumber()
+            << G4endl;
+        }}
 
   // Create KaplanQP simulator if not already available
   if (!kaplanQP) {

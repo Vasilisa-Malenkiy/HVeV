@@ -256,8 +256,8 @@ AttachPhononSensor(G4CMPSurfaceProperty* surfProp)
     if (!surfProp) return;
 
     auto sensorProp = surfProp->GetPhononMaterialPropertiesTablePointer();
-    sensorProp->AddConstProperty("filmAbsorption", 0.20);
-    sensorProp->AddConstProperty("filmThickness", dp_aluminumTopFilmDimZ);
+    sensorProp->AddConstProperty("filmAbsorption", 0.95);
+    sensorProp->AddConstProperty("filmThickness", dp_aluminumTopFilmDimZ);  // use passed thickness
     sensorProp->AddConstProperty("gapEnergy", 173.715e-6*eV);
     sensorProp->AddConstProperty("lowQPLimit", 3.);
     sensorProp->AddConstProperty("highQPLimit", 10.);
@@ -266,8 +266,8 @@ AttachPhononSensor(G4CMPSurfaceProperty* surfProp)
     sensorProp->AddConstProperty("vSound", 3.26*km/s);
     sensorProp->AddConstProperty("subgapAbsorption", 0.1);
 
-    G4CMPPhononElectrode* electrode = new G4CMPPhononElectrode();
-    //electrode->SetVerboseLevel(2);
+    // Instantiating custom KaplanQP HVeVPhononElectrode
+    HVeVPhononElectrode* electrode = new HVeVPhononElectrode();
     surfProp->SetPhononElectrode(electrode);
 
     G4CMPVElectrodePattern* electrode1 = surfProp->GetPhononElectrode();
@@ -278,7 +278,7 @@ AttachGrid(G4CMPSurfaceProperty* surfProp)
 {
     if (!surfProp) return;
     auto sensorProp = surfProp->GetPhononMaterialPropertiesTablePointer();
-    sensorProp->AddConstProperty("filmAbsorption", 0.20);
+    sensorProp->AddConstProperty("filmAbsorption", 0.95);
     sensorProp->AddConstProperty("filmThickness", dp_aluminumBottomFilmThickness);
     sensorProp->AddConstProperty("gapEnergy", 173.715e-6*eV);
     sensorProp->AddConstProperty("lowQPLimit", 3.);
@@ -297,30 +297,30 @@ AttachGrid(G4CMPSurfaceProperty* surfProp)
     // P_kaplan = 1 - exp(-4 * filmThickness / MFP)  [frac=4.0 in AbsorbPhonon]
     // P_total  = filmAbsorption * P_kaplan = 0.20 * P_kaplan
     // -----------------------------------------------------------------------
-    G4double filmThickness_nm = dp_aluminumBottomFilmThickness / nm;
-    G4double MFP_nm = (3.26e12) * (242e-12);  // nm
-    G4double P_kaplan = 1.0 - std::exp(-4.0 * filmThickness_nm / MFP_nm);
-    G4double P_total  = 0.20 * P_kaplan;
+//    G4double filmThickness_nm = dp_aluminumBottomFilmThickness / nm;
+//    G4double MFP_nm = (3.26e12) * (242e-12);  // nm
+//    G4double P_kaplan = 1.0 - std::exp(-4.0 * filmThickness_nm / MFP_nm);
+//    G4double P_total  = 0.20 * P_kaplan;
+//
+//    G4cout << G4endl;
+//    G4cout << "========================================" << G4endl;
+//    G4cout << "  AttachGrid: KaplanQP Film Parameters  " << G4endl;
+//    G4cout << "========================================" << G4endl;
+//    G4cout << "  Geometry thickness (fixed) : "
+//           << dp_aluminumBottomFilmDimZ/nm << " nm" << G4endl;
+//    G4cout << "  KaplanQP filmThickness     : "
+//           << filmThickness_nm << " nm" << G4endl;
+//    G4cout << "  MFP @ 2*Delta              : "
+//           << MFP_nm << " nm" << G4endl;
+//    G4cout << "  P_kaplan (1-exp(-4d/MFP))  : "
+//           << P_kaplan << G4endl;
+//    G4cout << "  P_total  (x filmAbsorption): "
+//           << P_total << G4endl;
+//    G4cout << "========================================" << G4endl;
+//    G4cout << G4endl;
+//    // -----------------------------------------------------------------------
 
-    G4cout << G4endl;
-    G4cout << "========================================" << G4endl;
-    G4cout << "  AttachGrid: KaplanQP Film Parameters  " << G4endl;
-    G4cout << "========================================" << G4endl;
-    G4cout << "  Geometry thickness (fixed) : "
-           << dp_aluminumBottomFilmDimZ/nm << " nm" << G4endl;
-    G4cout << "  KaplanQP filmThickness     : "
-           << filmThickness_nm << " nm" << G4endl;
-    G4cout << "  MFP @ 2*Delta              : "
-           << MFP_nm << " nm" << G4endl;
-    G4cout << "  P_kaplan (1-exp(-4d/MFP))  : "
-           << P_kaplan << G4endl;
-    G4cout << "  P_total  (x filmAbsorption): "
-           << P_total << G4endl;
-    G4cout << "========================================" << G4endl;
-    G4cout << G4endl;
-    // -----------------------------------------------------------------------
-
-    surfProp->SetPhononElectrode(new G4CMPPhononElectrode);
+    surfProp->SetPhononElectrode(new HVeVPhononElectrode);
     G4CMPVElectrodePattern* electrode = surfProp->GetPhononElectrode();
     electrode->SetVerboseLevel(2);
 }

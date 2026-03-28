@@ -13,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/hvevLib.dir/src/HVeVHit.cc.o.d"
   "CMakeFiles/hvevLib.dir/src/HVeVKaplanQP.cc.o"
   "CMakeFiles/hvevLib.dir/src/HVeVKaplanQP.cc.o.d"
+  "CMakeFiles/hvevLib.dir/src/HVeVPhononElectrode.cc.o"
+  "CMakeFiles/hvevLib.dir/src/HVeVPhononElectrode.cc.o.d"
   "CMakeFiles/hvevLib.dir/src/HVeVPrimaryGeneratorAction.cc.o"
   "CMakeFiles/hvevLib.dir/src/HVeVPrimaryGeneratorAction.cc.o.d"
   "CMakeFiles/hvevLib.dir/src/HVeVRunAction.cc.o"

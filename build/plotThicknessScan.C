@@ -60,16 +60,17 @@ double computeEnergyFraction(TTree *pB, TTree *pI, TTree *pO, double &rms) {
 
 void plotThicknessScan() {
 
-    const int Nfiles = 4;
-    double thickness[Nfiles] = {10, 20, 35, 50};
+    const int Nfiles = 5;
+    double thickness[Nfiles] = {1, 10, 20, 30, 50};
     double frac[Nfiles];
     double err[Nfiles];
 
     const char* filenames[Nfiles] = {
-        "10nmALBFT_merged.root",
-        "20nmALBFT_merged.root",
-        "35nmALBFT_merged.root",
-        "50nmALBFT_merged.root"
+        "1nm2ev.root",
+        "10nm2ev.root",
+        "20nm2ev.root",
+        "30nm2ev.root",
+        "50nm2ev.root"
     };
 
     for(int i=0; i<Nfiles; i++){

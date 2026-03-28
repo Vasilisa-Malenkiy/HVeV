@@ -56,7 +56,7 @@ class HVeVDetectorConstruction : public G4VUserDetectorConstruction
         // Geometry thickness — keep this FIXED for all runs
         //G4double dp_aluminumBottomFilmDimZ = 1 * CLHEP::nm; // thin enough to be geometrically invisible
         // COUPLED SCAN
-        G4double dp_aluminumBottomFilmDimZ = 10.*CLHEP::nm;
+        G4double dp_aluminumBottomFilmDimZ = 1.*CLHEP::nm;
         G4double dp_aluminumBottomFilmThickness = dp_aluminumBottomFilmDimZ;
         // KaplanQP physics thickness — this is what you vary between runs
         //G4double dp_aluminumBottomFilmThickness = 50.*CLHEP::nm;  // vary this: 10, 30, 60, 100, 200, 400, 600 nm
