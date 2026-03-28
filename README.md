@@ -4,7 +4,7 @@ This is a HVeV-like detector simulation package developed for characterization o
 
 ## Detector configuration
 
-The HVeV detector consists of:
+So far the HVeV detector consists of:
 
 - **Silicon substrate:** 10 × 10 × 4 mm  
 - **Top Al films (600 nm):** Split into inner and outer channels, each covering 50% of the top surface area  
