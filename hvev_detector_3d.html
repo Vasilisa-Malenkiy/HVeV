@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HVeV Detector — 3D Schematic</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a12;
+    color: #e0e0e8;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    width: 100vw; height: 100vh;
+  }
+  canvas { display: block; }
+
+  /* ── Title card ── */
+  #title-card {
+    position: fixed; top: 28px; left: 32px;
+    z-index: 10; pointer-events: none;
+  }
+  #title-card h1 {
+    font-size: 26px; font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #7eb8ff, #c4a0ff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  #title-card p {
+    font-size: 13px; color: #8888a0; margin-top: 4px;
+    font-weight: 400;
+  }
+
+  /* ── Legend ── */
+  #legend {
+    position: fixed; bottom: 28px; left: 32px;
+    z-index: 10; pointer-events: none;
+    display: flex; flex-direction: column; gap: 10px;
+    background: rgba(12,12,22,0.85);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px; padding: 16px 20px;
+    backdrop-filter: blur(12px);
+  }
+  .legend-row {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 400;
+  }
+  .legend-swatch {
+    width: 16px; height: 16px; border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .legend-label { color: #b0b0c0; }
+  .legend-detail {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px; color: #6e6e88; margin-left: auto;
+  }
+
+  /* ── Dimensions panel ── */
+  #dims {
+    position: fixed; top: 28px; right: 32px;
+    z-index: 10; pointer-events: none;
+    background: rgba(12,12,22,0.85);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px; padding: 16px 20px;
+    backdrop-filter: blur(12px);
+    font-size: 12.5px;
+  }
+  #dims h3 {
+    font-size: 13px; font-weight: 600; color: #9090b0;
+    margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .dim-row {
+    display: flex; justify-content: space-between; gap: 24px;
+    padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .dim-row:last-child { border-bottom: none; }
+  .dim-key { color: #8080a0; }
+  .dim-val {
+    font-family: 'JetBrains Mono', monospace;
+    color: #c0c0d8; font-weight: 500;
+  }
+
+  /* ── Controls hint ── */
+  #controls {
+    position: fixed; bottom: 28px; right: 32px;
+    z-index: 10; pointer-events: none;
+    font-size: 11px; color: #505068;
+    text-align: right; line-height: 1.8;
+  }
+  kbd {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px; padding: 1px 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: #707088;
+  }
+
+  /* ── Annotation labels (positioned via JS) ── */
+  .label-3d {
+    position: absolute; pointer-events: none;
+    font-size: 11.5px; font-weight: 500;
+    padding: 4px 10px; border-radius: 6px;
+    white-space: nowrap;
+    background: rgba(12,12,22,0.8);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(8px);
+    transition: opacity 0.2s;
+  }
+</style>
+</head>
+<body>
+
+<div id="title-card">
+  <h1>HVeV Phonon Detector</h1>
+  <p>Si substrate + Al QET films &middot; G4CMP simulation geometry</p>
+</div>
+
+<div id="dims">
+  <h3>Geometry</h3>
+  <div class="dim-row"><span class="dim-key">Si substrate</span><span class="dim-val">10 &times; 10 &times; 4 mm</span></div>
+  <div class="dim-row"><span class="dim-key">Top Al (inner)</span><span class="dim-val">7.07 &times; 7.07 mm &middot; 600 nm</span></div>
+  <div class="dim-row"><span class="dim-key">Top Al (outer)</span><span class="dim-val">frame to 10 mm &middot; 600 nm</span></div>
+  <div class="dim-row"><span class="dim-key">Bottom Al grid</span><span class="dim-val">5% coverage &middot; 20 nm</span></div>
+  <div class="dim-row"><span class="dim-key">Bias voltage</span><span class="dim-val">10 V</span></div>
+  <div class="dim-row"><span class="dim-key">&eta;(Si&rarr;Al)</span><span class="dim-val">0.94</span></div>
+  <div class="dim-row"><span class="dim-key">&eta;(Al&rarr;Si)</span><span class="dim-val">0.37</span></div>
+</div>
+
+<div id="legend">
+  <div class="legend-row">
+    <div class="legend-swatch" style="background:#4a7ab5;"></div>
+    <span class="legend-label">Silicon substrate</span>
+    <span class="legend-detail">[100] oriented</span>
+  </div>
+  <div class="legend-row">
+    <div class="legend-swatch" style="background:#e8b84a;"></div>
+    <span class="legend-label">Al inner channel (TES)</span>
+    <span class="legend-detail">50% area</span>
+  </div>
+  <div class="legend-row">
+    <div class="legend-swatch" style="background:#d4883a;"></div>
+    <span class="legend-label">Al outer channel (TES)</span>
+    <span class="legend-detail">50% area</span>
+  </div>
+  <div class="legend-row">
+    <div class="legend-swatch" style="background:#5ae0a0;"></div>
+    <span class="legend-label">Al bottom grid</span>
+    <span class="legend-detail">5% coverage</span>
+  </div>
+  <div class="legend-row">
+    <div class="legend-swatch" style="background:linear-gradient(180deg,#ff6666,#6666ff);"></div>
+    <span class="legend-label">E-field (10 V bias)</span>
+    <span class="legend-detail">&minus;z direction</span>
+  </div>
+</div>
+
+<div id="controls">
+  <kbd>drag</kbd> rotate &nbsp; <kbd>scroll</kbd> zoom &nbsp; <kbd>right-drag</kbd> pan<br>
+  <kbd>R</kbd> reset view &nbsp; <kbd>E</kbd> toggle E-field &nbsp; <kbd>G</kbd> toggle grid glow
+</div>
+
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.152.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.152.0/examples/jsm/"
+    }
+  }
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ══════════════════════════════════════════════════════
+//  DETECTOR DIMENSIONS
+// ══════════════════════════════════════════════════════
+const SI_X = 10, SI_Y = 10, SI_Z = 4;
+const INNER_FRAC = 0.7071;
+const INNER_X = SI_X * INNER_FRAC;
+const INNER_Y = SI_Y * INNER_FRAC;
+const GRID_COVERAGE = 0.05;
+const BOT_FILM_Z = 0.1;
+const EXAG_FILM = 0.35;
+
+// ══════════════════════════════════════════════════════
+//  SCENE SETUP
+// ══════════════════════════════════════════════════════
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a12);
+scene.fog = new THREE.FogExp2(0x0a0a12, 0.012);
+
+const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 500);
+camera.position.set(14, 11, 16);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+document.body.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.target.set(0, 0, 0);
+controls.minDistance = 8;
+controls.maxDistance = 60;
+
+// ══════════════════════════════════════════════════════
+//  LIGHTING
+// ══════════════════════════════════════════════════════
+const ambientLight = new THREE.AmbientLight(0x303048, 0.6);
+scene.add(ambientLight);
+
+const keyLight = new THREE.DirectionalLight(0xddeeff, 1.2);
+keyLight.position.set(8, 15, 10);
+keyLight.castShadow = true;
+scene.add(keyLight);
+
+const fillLight = new THREE.DirectionalLight(0x8899cc, 0.4);
+fillLight.position.set(-6, 8, -4);
+scene.add(fillLight);
+
+const rimLight = new THREE.DirectionalLight(0xccaaff, 0.3);
+rimLight.position.set(-3, -5, 8);
+scene.add(rimLight);
+
+// ══════════════════════════════════════════════════════
+//  MATERIALS
+// ══════════════════════════════════════════════════════
+const siMat = new THREE.MeshPhysicalMaterial({
+  color: 0x3a6090, transparent: true, opacity: 0.32,
+  roughness: 0.15, metalness: 0.05, transmission: 0.55,
+  thickness: 2.0, side: THREE.DoubleSide, depthWrite: false,
+});
+
+const siEdgeMat = new THREE.LineBasicMaterial({
+  color: 0x5a8ac0, transparent: true, opacity: 0.5,
+});
+
+const alInnerMat = new THREE.MeshPhysicalMaterial({
+  color: 0xe8b84a, roughness: 0.25, metalness: 0.85, clearcoat: 0.4,
+});
+
+const alOuterMat = new THREE.MeshPhysicalMaterial({
+  color: 0xd4883a, roughness: 0.3, metalness: 0.8, clearcoat: 0.3,
+});
+
+const gridMat = new THREE.MeshPhysicalMaterial({
+  color: 0x40d890, roughness: 0.3, metalness: 0.7,
+  emissive: 0x20a060, emissiveIntensity: 0.3,
+});
+
+// ══════════════════════════════════════════════════════
+//  SILICON SUBSTRATE + STATIC LATTICE DOTS
+// ══════════════════════════════════════════════════════
+const siGeo = new THREE.BoxGeometry(SI_X, SI_Z, SI_Y);
+const siMesh = new THREE.Mesh(siGeo, siMat);
+siMesh.receiveShadow = true;
+scene.add(siMesh);
+
+const siEdges = new THREE.LineSegments(new THREE.EdgesGeometry(siGeo), siEdgeMat);
+scene.add(siEdges);
+
+const latticeDots = new THREE.BufferGeometry();
+const latticePositions = [];
+const spacing = 1.2;
+for (let x = -SI_X/2 + spacing; x < SI_X/2; x += spacing) {
+  for (let y = -SI_Z/2 + spacing; y < SI_Z/2; y += spacing) {
+    for (let z = -SI_Y/2 + spacing; z < SI_Y/2; z += spacing) {
+      if (Math.random() > 0.6) latticePositions.push(x, y, z);
+    }
+  }
+}
+latticeDots.setAttribute('position', new THREE.Float32BufferAttribute(latticePositions, 3));
+scene.add(new THREE.Points(latticeDots, new THREE.PointsMaterial({ color: 0x6090c0, size: 0.06, transparent: true, opacity: 0.25 })));
+
+// ══════════════════════════════════════════════════════
+//  TOP AL FILMS
+// ══════════════════════════════════════════════════════
+const topY = SI_Z / 2 + EXAG_FILM / 2;
+
+const innerMesh = new THREE.Mesh(new THREE.BoxGeometry(INNER_X, EXAG_FILM, INNER_Y), alInnerMat);
+innerMesh.position.y = topY;
+innerMesh.castShadow = true;
+scene.add(innerMesh);
+
+const outerGroup = new THREE.Group();
+const frameW = (SI_X - INNER_X) / 2;
+const lrGeo = new THREE.BoxGeometry(frameW, EXAG_FILM, SI_Y);
+const tbGeo = new THREE.BoxGeometry(INNER_X, EXAG_FILM, frameW);
+
+const l = new THREE.Mesh(lrGeo, alOuterMat); l.position.set(-(INNER_X/2 + frameW/2), topY, 0); outerGroup.add(l);
+const r = new THREE.Mesh(lrGeo, alOuterMat); r.position.set((INNER_X/2 + frameW/2), topY, 0); outerGroup.add(r);
+const t = new THREE.Mesh(tbGeo, alOuterMat); t.position.set(0, topY, -(INNER_Y/2 + frameW/2)); outerGroup.add(t);
+const b = new THREE.Mesh(tbGeo, alOuterMat); b.position.set(0, topY, (INNER_Y/2 + frameW/2)); outerGroup.add(b);
+outerGroup.children.forEach(m => m.castShadow = true);
+scene.add(outerGroup);
+
+const dividerLine = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(INNER_X, EXAG_FILM * 1.01, INNER_Y)),
+  new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.35 }));
+dividerLine.position.y = topY;
+scene.add(dividerLine);
+
+// ══════════════════════════════════════════════════════
+//  BOTTOM AL GRID
+// ══════════════════════════════════════════════════════
+const gridGroup = new THREE.Group();
+const botY = -SI_Z / 2 - BOT_FILM_Z / 2;
+const barWidthVis = 0.18;
+const N_BARS = 7;
+
+for (let i = 0; i < N_BARS; i++) {
+  const frac = (i + 1) / (N_BARS + 1);
+  const pos = -SI_X / 2 + frac * SI_X;
+  const barH = new THREE.Mesh(new THREE.BoxGeometry(SI_X * 0.96, BOT_FILM_Z, barWidthVis), gridMat);
+  barH.position.set(0, botY, pos);
+  gridGroup.add(barH);
+  const barV = new THREE.Mesh(new THREE.BoxGeometry(barWidthVis, BOT_FILM_Z, SI_Y * 0.96), gridMat);
+  barV.position.set(pos, botY, 0);
+  gridGroup.add(barV);
+}
+scene.add(gridGroup);
+
+const gridGlowMat = new THREE.MeshBasicMaterial({ color: 0x30c080, transparent: true, opacity: 0.06, side: THREE.DoubleSide });
+const gridGlow = new THREE.Mesh(new THREE.PlaneGeometry(SI_X * 0.92, SI_Y * 0.92), gridGlowMat);
+gridGlow.rotation.x = -Math.PI / 2; gridGlow.position.y = botY - BOT_FILM_Z / 2 - 0.01;
+scene.add(gridGlow);
+
+// ══════════════════════════════════════════════════════
+//  E-FIELD ARROWS
+// ══════════════════════════════════════════════════════
+const eFieldGroup = new THREE.Group();
+let showEField = true;
+[[0, 0], [-2.8, -2.8], [2.8, 2.8], [-2.8, 2.8], [2.8, -2.8]].forEach(([ax, az]) => {
+  const arrow = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, SI_Z * 0.7, 8), new THREE.MeshBasicMaterial({ color: 0xff5555, transparent: true, opacity: 0.45 }));
+  arrow.position.set(ax, 0, az); eFieldGroup.add(arrow);
+  const cone = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.4, 8), new THREE.MeshBasicMaterial({ color: 0x5566ff, transparent: true, opacity: 0.6 }));
+  cone.position.set(ax, -SI_Z * 0.35 - 0.15, az); cone.rotation.z = Math.PI; eFieldGroup.add(cone);
+});
+scene.add(eFieldGroup);
+
+// ══════════════════════════════════════════════════════
+//  DIMENSION LINES
+// ══════════════════════════════════════════════════════
+function makeDimLine(p1, p2) {
+  const line = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...p1), new THREE.Vector3(...p2)]),
+    new THREE.LineDashedMaterial({ color: 0x606080, dashSize: 0.2, gapSize: 0.12, transparent: true, opacity: 0.4 }));
+  line.computeLineDistances(); return line;
+}
+scene.add(makeDimLine([-SI_X/2, -SI_Z/2 - 1.2, SI_Y/2 + 0.5], [SI_X/2, -SI_Z/2 - 1.2, SI_Y/2 + 0.5]));
+scene.add(makeDimLine([SI_X/2 + 0.5, -SI_Z/2 - 1.2, -SI_Y/2], [SI_X/2 + 0.5, -SI_Z/2 - 1.2, SI_Y/2]));
+scene.add(makeDimLine([SI_X/2 + 0.8, -SI_Z/2, SI_Y/2 + 0.8], [SI_X/2 + 0.8, SI_Z/2, SI_Y/2 + 0.8]));
+
+// ══════════════════════════════════════════════════════
+//  3D LABELS
+// ══════════════════════════════════════════════════════
+const labelData = [
+  { text: 'Si [100]', pos: [0, 0, 0], color: '#7eb8ff' },
+  { text: 'Al inner (TES)', pos: [0, SI_Z/2 + EXAG_FILM + 0.6, 0], color: '#e8b84a' },
+  { text: 'Al outer (TES)', pos: [SI_X/2 - 0.3, SI_Z/2 + EXAG_FILM + 0.6, SI_Y/2 - 0.3], color: '#d4883a' },
+  { text: 'Al grid (5%)', pos: [0, -SI_Z/2 - BOT_FILM_Z - 0.6, 0], color: '#5ae0a0' },
+  { text: '10 mm', pos: [0, -SI_Z/2 - 1.2, SI_Y/2 + 0.5], color: '#8888a0' },
+  { text: '10 mm', pos: [SI_X/2 + 0.5, -SI_Z/2 - 1.2, 0], color: '#8888a0' },
+  { text: '4 mm', pos: [SI_X/2 + 0.8, 0, SI_Y/2 + 0.8], color: '#8888a0' },
+  { text: 'E = V/d', pos: [0.6, 0.3, 3.8], color: '#cc7788' },
+];
+const labelEls = labelData.map(d => {
+  const el = document.createElement('div'); el.className = 'label-3d'; el.textContent = d.text; el.style.color = d.color; el.style.borderColor = d.color + '30';
+  document.body.appendChild(el); return { el, pos: new THREE.Vector3(...d.pos) };
+});
+
+function updateLabels() {
+  labelEls.forEach(({ el, pos }) => {
+    const v = pos.clone().project(camera);
+    if (v.z > 1) { el.style.opacity = '0'; return; }
+    el.style.opacity = '1';
+    el.style.left = ((v.x + 1) * window.innerWidth / 2 - el.offsetWidth / 2) + 'px';
+    el.style.top = (-(v.y - 1) * window.innerHeight / 2 - el.offsetHeight / 2) + 'px';
+  });
+}
+
+scene.add(new THREE.GridHelper(40, 40, 0x1a1a30, 0x12122a));
+
+let showGridGlow = true;
+window.addEventListener('keydown', e => {
+  if (e.key.toLowerCase() === 'r') { camera.position.set(14, 11, 16); controls.target.set(0, 0, 0); }
+  if (e.key.toLowerCase() === 'e') { showEField = !showEField; eFieldGroup.visible = showEField; }
+  if (e.key.toLowerCase() === 'g') { showGridGlow = !showGridGlow; gridGlow.visible = showGridGlow; gridMat.emissiveIntensity = showGridGlow ? 0.3 : 0; }
+});
+
+let time = 0;
+function animate() {
+  requestAnimationFrame(animate);
+  time += 0.01;
+  controls.update();
+  if (showGridGlow) { gridMat.emissiveIntensity = 0.2 + 0.15 * Math.sin(time * 2); gridGlowMat.opacity = 0.04 + 0.03 * Math.sin(time * 2); }
+  if (showEField) eFieldGroup.children.forEach((c, i) => { if (c.material) c.material.opacity = 0.3 + 0.15 * Math.sin(time * 3 + i * 0.5); });
+  updateLabels();
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>
